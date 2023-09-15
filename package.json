@@ -1,0 +1,14 @@
+{
+  "name": "htmlbunplugin",
+  "module": "HtmlBunPlugin.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build ./src/HtmlBunPlugin.ts --outdir ./out"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
