@@ -1,7 +1,5 @@
 {
-  "name": "htmlbunplugin",
-  "module": "HtmlBunPlugin.ts",
-  "type": "module",
+  "name": "@takinabradley/htmlbunplugin",
   "scripts": {
     "build": "bun build ./src/HtmlBunPlugin.ts --outdir ./out"
   },
@@ -10,5 +8,21 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "description": "A quick and dirty analogue to HtmlWebpackPlugin for Bun's bundler.",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takinabradley/HtmlBunPlugin.git"
+  },
+  "keywords": [
+    "bun"
+  ],
+  "author": "takinabradley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/takinabradley/HtmlBunPlugin/issues"
+  },
+  "homepage": "https://github.com/takinabradley/HtmlBunPlugin#readme",
+  "main": "HtmlBunPlugin.ts"
 }
