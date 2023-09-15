@@ -9,7 +9,7 @@ Install dependencies:
 bun install
 ```
 
-To run:
+To build:
 
 ```bash
 bun run build
