@@ -1,0 +1,7 @@
+# Ignore all
+*
+
+# Except
+!out/*
+!package.json
+!README.md

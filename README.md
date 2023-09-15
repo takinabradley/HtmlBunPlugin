@@ -21,4 +21,18 @@ Bun.build({
   })]
 })
 ```
+
+## Contributing
+
+### Building
+If you'd like to help contribute to additional features, you can build a new version of the plugin from `src/` with the following command:
+```
+bun run build
+```
+
+Make sure you install dependencies first with 
+```
+bun install
+```
+
 This project was created using `bun init` in bun v1.0.1. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
