@@ -10,7 +10,7 @@
     "typescript": "^5.0.0"
   },
   "description": "A quick and dirty analogue to HtmlWebpackPlugin for Bun's bundler.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/takinabradley/HtmlBunPlugin.git"
