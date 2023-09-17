@@ -25,6 +25,41 @@ Bun.build({
 })
 ```
 
+Assuming `./src/index.html` looked like the following:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>This is my template file!</h1>
+</body>
+</html>
+```
+
+The above code would output a `whatever-you-want.html` in the `./out` directory that looks like this:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- The following <script> tags added via HTMLBunPlugin -->
+  <script src='./index.js' defer></script>
+  <!-- End of HtmlBunPlugin script tags -->
+  <!-- The following <title> added via HtmlBunPlugin -->
+  <title>My App</title>
+</head>
+<body>
+  <h1>This is my template file!</h1>
+</body>
+</html>
+```
+
 ## Contributing
 
 ### Building
