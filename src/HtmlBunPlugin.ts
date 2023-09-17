@@ -1,37 +1,21 @@
 import type { BunPlugin, PluginBuilder } from "bun";
+import defautHtmlPath from './default.html'
 import fs from 'node:fs/promises'
+import createHtmlCloneWithScriptTags from "./createHtmlCloneWithScriptTags";
 
-const filePathsToFileNames = (entrypoints: string[]) => 
-  entrypoints.map(entry => entry.slice(entry.lastIndexOf('/') + 1))
+export type HtmlBunPluginConfig = {
+  filename: string,
+  title?: string,
+  template?: string
+} 
 
-function createDefaultHTML(entrypoints: string[]) {
-  const fileNames = filePathsToFileNames(entrypoints)
-  const scriptTags = 
-    fileNames
-      .map(fileName => `\n  <script src='./${fileName}' type='module'></script>`)
-      .join('')
-
-  const  defaultHTML = 
-`<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>${scriptTags}
-</head>
-<body>
-  
-</body>
-</html>`
-
-  return new File([defaultHTML], 'index.html', {type: "text/html"})
-}
-
-type HtmlBunPluginConfig = {
-  filename?: string,
-  title?: string
-}
-
+/**
+ * 
+ * @param {HtmlBunPluginConfig} config - optional options object
+ * - filename: Defaults to 'index.html'. Required if passing in an options object.
+ * - title?: adds a title tag with the provided string. Defaults to 'Bun App'
+ * - template?: path to a template HTML file to inject entries and title into
+ */
 function HtmlBunPlugin(config: HtmlBunPluginConfig = {filename: 'index.html', title:'Bun App'}): BunPlugin {
   return {
     name: "HtmlBunPlugin",
@@ -39,11 +23,17 @@ function HtmlBunPlugin(config: HtmlBunPluginConfig = {filename: 'index.html', ti
       if(!build.config.outdir) return
 
       const outdir = build.config.outdir
-      const file = createDefaultHTML(build.config.entrypoints)
+      const file = await createHtmlCloneWithScriptTags(
+        config.template || defautHtmlPath, 
+        build.config.entrypoints, 
+        config.filename, 
+        config.title
+      )
+
       try {
         await fs.writeFile(`${outdir}/${config.filename}`, await file.arrayBuffer())
       } catch {
-        await fs.mkdir(outdir)
+        await fs.mkdir(outdir, {recursive: true})
         await fs.writeFile(`${outdir}/${config.filename}`, await file.arrayBuffer())
       }
     }
