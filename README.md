@@ -9,8 +9,9 @@ bun install @takinabradley/htmlbunplugin
 
 In a build file, import the HtmlBunPlugin factory, and add it to the plugin list when you run `Bun.build`:
 ```js
-// build.js
+// build.js in root of project
 import HtmlBunPlugin from '@takinabradley/htmlbunplugin'
+import templateHtmlPath from './src/index.html'
 
 Bun.build({
   entrypoints: ['src/index.js'],
@@ -19,7 +20,7 @@ Bun.build({
     // Accepts an optional config object
     filename: 'whatever-you-want.html', // defaults to index.html
     title: 'My App', // defaults to 'Bun App'
-    template: 'src/myTemplate.html' // provide a template .html file to inject scripts and title into
+    template: templateHtmlPath // provide a template .html file to inject scripts and title into
   })]
 })
 ```
