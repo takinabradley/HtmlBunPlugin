@@ -33,7 +33,7 @@ async function createHtmlCloneWithScriptTags(htmlFilePath, entrypoints, fileName
       if (el.tagName !== "head")
         return;
       addScriptTags(el, entrypoints);
-      if (title)
+      if (title !== undefined)
         addTitleTag(el, title);
     }
   };
@@ -49,10 +49,10 @@ var HtmlBunPlugin = function(config = { filename: "index.html", title: "Bun App"
   return {
     name: "HtmlBunPlugin",
     async setup(build) {
-      if (!build.config.outdir)
+      if (build.config.outdir === undefined)
         return;
       const outdir = build.config.outdir;
-      const file = await createHtmlCloneWithScriptTags(config.template || default_default, build.config.entrypoints, config.filename, config.title);
+      const file = await createHtmlCloneWithScriptTags(config.template ?? default_default, build.config.entrypoints, config.filename, config.title);
       try {
         await fs.writeFile(`${outdir}/${config.filename}`, await file.arrayBuffer());
       } catch {
