@@ -27,7 +27,7 @@ function addScriptTags (el: HTMLRewriterTypes.Element, entrypoints: string[], in
   // add sript tags for entry points
   const fileNames = filePathsToFileNames(entrypoints)
   const scriptTags = fileNames.map(fileName =>
-    `  <script src='./${fileName}' type='module'></script>\n`
+    `  <script src='./${fileName}' defer></script>\n`
   )
 
   if (insertComments) el.append('  <!-- The following <script> tags added via HTMLBunPlugin -->\n', { html: true })

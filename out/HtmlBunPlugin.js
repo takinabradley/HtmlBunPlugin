@@ -8,7 +8,7 @@ import fs from "fs/promises";
 // src/createHtmlCloneWithScriptTags.ts
 var addScriptTags = function(el, entrypoints, insertComments = true) {
   const fileNames = filePathsToFileNames(entrypoints);
-  const scriptTags = fileNames.map((fileName) => `  <script src='./${fileName}' type='module'></script>\n`);
+  const scriptTags = fileNames.map((fileName) => `  <script src='./${fileName}' defer></script>\n`);
   if (insertComments)
     el.append("  <!-- The following <script> tags added via HTMLBunPlugin -->\n", { html: true });
   scriptTags.forEach((script) => el.append(script, { html: true }));
