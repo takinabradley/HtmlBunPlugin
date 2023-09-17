@@ -16,8 +16,10 @@ Bun.build({
   entrypoints: ['src/index.js'],
   outdir: './out',
   plugins: [HtmlBunPlugin({
-    // optional config can include a name for the generated .html file in the outdir:
-    filename: 'whatever-you-want.html'
+    // Accepts an optional config object
+    filename: 'whatever-you-want.html', // defaults to index.html
+    title: 'My App', // defaults to 'Bun App'
+    template: 'src/myTemplate.html' // provide a template .html file to inject scripts and title into
   })]
 })
 ```
