@@ -1,7 +1,7 @@
 {
   "name": "@takinabradley/htmlbunplugin",
   "scripts": {
-    "build": "bun build ./src/HtmlBunPlugin.ts --outdir ./out"
+    "build": "bun build ./src/HtmlBunPlugin.ts --outdir ./out --target=bun"
   },
   "devDependencies": {
     "bun-types": "latest"
