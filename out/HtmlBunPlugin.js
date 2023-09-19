@@ -7,7 +7,7 @@ import fs from "fs/promises";
 
 // src/createHtmlCloneWithScriptTags.ts
 var addScriptTags = function(el, entrypoints, insertComments = true) {
-  const fileNames = filePathsToFileNames(entrypoints);
+  const fileNames = parseScriptNamesFromEntryPoints(entrypoints);
   const scriptTags = fileNames.map((fileName) => `  <script src='./${fileName}' defer></script>\n`);
   if (insertComments)
     el.append("  <!-- The following <script> tags added via HTMLBunPlugin -->\n", { html: true });
@@ -20,11 +20,18 @@ var addTitleTag = function(el, title, insertComments = true) {
     el.append("  <!-- The following <title> added via HtmlBunPlugin -->\n", { html: true });
   el.append(`  <title>${title}</title>\n`, { html: true });
 };
-var filePathsToFileNames = function(filePaths) {
-  return filePaths.map((entry) => {
-    const lastIndexOfSlash = entry.lastIndexOf("/");
-    return lastIndexOfSlash >= 0 ? entry.slice(entry.lastIndexOf("/") + 1) : entry;
-  });
+var filePathToFileName = function(path) {
+  const lastIndexOfSlash = path.lastIndexOf("/");
+  return lastIndexOfSlash >= 0 ? path.slice(lastIndexOfSlash + 1) : path;
+};
+var replaceFileExtension = function(newExtension, filename) {
+  if (filename.endsWith(newExtension))
+    return filename;
+  const lastIndexOfDot = filename.lastIndexOf(".");
+  return lastIndexOfDot !== -1 ? `${filename.slice(0, lastIndexOfDot) + newExtension}` : `${filename + newExtension}`;
+};
+var parseScriptNamesFromEntryPoints = function(entrypoints) {
+  return entrypoints.map((entryPath) => replaceFileExtension(".js", filePathToFileName(entryPath)));
 };
 var rewriter = new HTMLRewriter;
 async function createHtmlCloneWithScriptTags(htmlFilePath, entrypoints, fileName, title) {

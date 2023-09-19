@@ -25,7 +25,7 @@ export default async function createHtmlCloneWithScriptTags (
 
 function addScriptTags (el: HTMLRewriterTypes.Element, entrypoints: string[], insertComments: boolean = true): void {
   // add sript tags for entry points
-  const fileNames = filePathsToFileNames(entrypoints)
+  const fileNames = parseScriptNamesFromEntryPoints(entrypoints) // replaceExtensionsWithJs(filePathsToFileNames(entrypoints))
   const scriptTags = fileNames.map(fileName =>
     `  <script src='./${fileName}' defer></script>\n`
   )
@@ -40,11 +40,21 @@ function addTitleTag (el: HTMLRewriterTypes.Element, title: string, insertCommen
   el.append(`  <title>${title}</title>\n`, { html: true })
 }
 
-function filePathsToFileNames (filePaths: string[]): string[] {
-  return filePaths.map(entry => {
-    const lastIndexOfSlash = entry.lastIndexOf('/')
-    return (
-      lastIndexOfSlash >= 0 ? entry.slice(entry.lastIndexOf('/') + 1) : entry
-    )
-  })
+function filePathToFileName (path: string): string {
+  const lastIndexOfSlash = path.lastIndexOf('/')
+  return (
+    lastIndexOfSlash >= 0 ? path.slice(lastIndexOfSlash + 1) : path
+  )
+}
+
+function replaceFileExtension (newExtension: string, filename: string): string {
+  if (filename.endsWith(newExtension)) return filename
+  const lastIndexOfDot = filename.lastIndexOf('.')
+  return lastIndexOfDot !== -1 ? `${filename.slice(0, lastIndexOfDot) + newExtension}` : `${filename + newExtension}`
+}
+
+function parseScriptNamesFromEntryPoints (entrypoints: string[]): string[] {
+  return entrypoints.map(entryPath =>
+    replaceFileExtension('.js', filePathToFileName(entryPath))
+  )
 }
