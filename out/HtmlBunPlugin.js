@@ -1,8 +1,5 @@
 // @bun
-// src/default.html
-var default_default = "./default-66fbc1e590c0cb2c.html";
-
-// src/HtmlBunPlugin.ts
+// src/createHtmlCloneW
 import fs from "fs/promises";
 
 // src/createHtmlCloneWithScriptTags.ts
@@ -51,7 +48,7 @@ async function createHtmlCloneWithScriptTags(htmlFilePath, entrypoints, fileName
   return new File([newHtmlBlob], fileName, { type: newHtmlBlob.type });
 }
 
-// src/HtmlBunPlugin.ts
+// src/createHtmlCloneW
 var HtmlBunPlugin = function(config = { filename: "index.html", title: "Bun App" }) {
   return {
     name: "HtmlBunPlugin",
@@ -59,7 +56,7 @@ var HtmlBunPlugin = function(config = { filename: "index.html", title: "Bun App"
       if (build.config.outdir === undefined)
         return;
       const outdir = build.config.outdir;
-      const file = await createHtmlCloneWithScriptTags(config.template ?? default_default, build.config.entrypoints, config.filename, config.title);
+      const file = await createHtmlCloneWithScriptTags(config.template ?? defautHtmlPath, build.config.entrypoints, config.filename, config.title);
       try {
         await fs.writeFile(`${outdir}/${config.filename}`, await file.arrayBuffer());
       } catch {
@@ -69,6 +66,7 @@ var HtmlBunPlugin = function(config = { filename: "index.html", title: "Bun App"
     }
   };
 };
+var defautHtmlPath = import.meta.dir + "/default.html";
 var HtmlBunPlugin_default = HtmlBunPlugin;
 export {
   HtmlBunPlugin_default as default
