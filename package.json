@@ -30,6 +30,6 @@
   ],
   "license": "ISC",
   "scripts": {
-    "build": "bun build ./src/HtmlBunPlugin.ts --outdir ./out --target=bun"
+    "build": "bun ./build.bun.ts"
   }
 }
