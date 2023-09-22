@@ -65,7 +65,7 @@ The above code would output a `whatever-you-want.html` in the `./out` directory 
 ### Building
 If you'd like to help contribute to additional features, you can build a new version of the plugin from `src/` with the following command:
 ```
-bun run build
+bun build.bun.ts
 ```
 
 Make sure you install dependencies first with 
