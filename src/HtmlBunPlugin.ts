@@ -1,7 +1,9 @@
 import type { BunPlugin, PluginBuilder } from 'bun'
-import defautHtmlPath from './default.html'
 import fs from 'node:fs/promises'
 import createHtmlCloneWithScriptTags from './createHtmlCloneWithScriptTags'
+
+// copied to outdir via CopyBunPlugin
+const defautHtmlPath: string = import.meta.dir + '/default.html'
 
 export interface HtmlBunPluginConfig {
   filename: string
@@ -24,7 +26,7 @@ function HtmlBunPlugin (config: HtmlBunPluginConfig = { filename: 'index.html', 
 
       const outdir = build.config.outdir
       const file = await createHtmlCloneWithScriptTags(
-        config.template ?? defautHtmlPath as string, // defautHtmlPath should always exist
+        config.template ?? defautHtmlPath,
         build.config.entrypoints,
         config.filename,
         config.title
