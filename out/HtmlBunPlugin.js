@@ -1,5 +1,5 @@
 // @bun
-// src/createHtmlCloneW
+// src/HtmlBunPlugin.ts
 import fs from "fs/promises";
 
 // src/createHtmlCloneWithScriptTags.ts
@@ -48,7 +48,7 @@ async function createHtmlCloneWithScriptTags(htmlFilePath, entrypoints, fileName
   return new File([newHtmlBlob], fileName, { type: newHtmlBlob.type });
 }
 
-// src/createHtmlCloneW
+// src/HtmlBunPlugin.ts
 var HtmlBunPlugin = function(config = { filename: "index.html", title: "Bun App" }) {
   return {
     name: "HtmlBunPlugin",
