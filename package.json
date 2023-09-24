@@ -1,7 +1,8 @@
 {
   "name": "@takinabradley/htmlbunplugin",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "takinabradley",
+  "types": "./out/HtmlBunPlugin.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/takinabradley/HtmlBunPlugin.git"

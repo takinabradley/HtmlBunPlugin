@@ -3,6 +3,6 @@
 
 # Except
 # TODO: Currently exporting the source .ts files. Figure out how to export built code.
-!src/*
+!out/*
 !package.json
 !README.md
