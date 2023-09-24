@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/takinabradley/HtmlBunPlugin.git"
   },
-  "main": "./out/HtmlBunPlugin.js",
+  "module": "./out/HtmlBunPlugin.js",
   "devDependencies": {
     "@takinabradley/copybunplugin": "^0.0.5",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
