@@ -27,7 +27,10 @@
   "description": "A quick and dirty analogue to HtmlWebpackPlugin for Bun's bundler.",
   "homepage": "https://github.com/takinabradley/HtmlBunPlugin#readme",
   "keywords": [
-    "bun"
+    "bun",
+    "bundler",
+    "plugin",
+    "html"
   ],
   "license": "ISC",
   "scripts": {
