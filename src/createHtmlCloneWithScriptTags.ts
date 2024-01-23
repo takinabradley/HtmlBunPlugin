@@ -1,11 +1,11 @@
-const rewriter = new HTMLRewriter()
-
 export default async function createHtmlCloneWithScriptTags (
   htmlFilePath: string,
   entrypoints: string[],
   fileName: string,
   title?: string
 ): Promise<File> {
+  const rewriter = new HTMLRewriter()
+
   const headElementHandler = {
     element (el: HTMLRewriterTypes.Element) {
       if (el.tagName !== 'head') return
