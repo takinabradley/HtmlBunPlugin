@@ -30,8 +30,8 @@ var replaceFileExtension = function(newExtension, filename) {
 var parseScriptNamesFromEntryPoints = function(entrypoints) {
   return entrypoints.map((entryPath) => replaceFileExtension(".js", filePathToFileName(entryPath)));
 };
-var rewriter = new HTMLRewriter;
 async function createHtmlCloneWithScriptTags(htmlFilePath, entrypoints, fileName, title) {
+  const rewriter = new HTMLRewriter;
   const headElementHandler = {
     element(el) {
       if (el.tagName !== "head")

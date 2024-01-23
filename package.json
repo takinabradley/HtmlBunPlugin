@@ -1,6 +1,6 @@
 {
   "name": "@takinabradley/htmlbunplugin",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "takinabradley",
   "types": "./out/HtmlBunPlugin.d.ts",
   "repository": {
