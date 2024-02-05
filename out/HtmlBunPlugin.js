@@ -3,9 +3,9 @@
 import fs from "fs/promises";
 
 // src/createHtmlCloneWithScriptTags.ts
-var addScriptTags = function(el, entrypoints, insertComments = true) {
+var addScriptTags = function(el, entrypoints, publicPath, insertComments = true) {
   const fileNames = parseScriptNamesFromEntryPoints(entrypoints);
-  const scriptTags = fileNames.map((fileName) => `  <script src='./${fileName}' defer></script>\n`);
+  const scriptTags = fileNames.map((fileName) => `  <script src='${publicPath}${fileName}' defer></script>\n`);
   if (insertComments)
     el.append("  <!-- The following <script> tags added via HTMLBunPlugin -->\n", { html: true });
   scriptTags.forEach((script) => el.append(script, { html: true }));
@@ -30,13 +30,13 @@ var replaceFileExtension = function(newExtension, filename) {
 var parseScriptNamesFromEntryPoints = function(entrypoints) {
   return entrypoints.map((entryPath) => replaceFileExtension(".js", filePathToFileName(entryPath)));
 };
-async function createHtmlCloneWithScriptTags(htmlFilePath, entrypoints, fileName, title) {
+async function createHtmlCloneWithScriptTags(htmlFilePath, entrypoints, fileName, title, publicPath = "./") {
   const rewriter = new HTMLRewriter;
   const headElementHandler = {
     element(el) {
       if (el.tagName !== "head")
         return;
-      addScriptTags(el, entrypoints);
+      addScriptTags(el, entrypoints, publicPath);
       if (title !== undefined)
         addTitleTag(el, title);
     }
@@ -49,14 +49,14 @@ async function createHtmlCloneWithScriptTags(htmlFilePath, entrypoints, fileName
 }
 
 // src/HtmlBunPlugin.ts
-var HtmlBunPlugin = function(config = { filename: "index.html", title: "Bun App" }) {
+var HtmlBunPlugin = function(config = { filename: "index.html", title: "Bun App", publicPath: "./" }) {
   return {
     name: "HtmlBunPlugin",
     async setup(build) {
       if (build.config.outdir === undefined)
         return;
       const outdir = build.config.outdir;
-      const file = await createHtmlCloneWithScriptTags(config.template ?? defautHtmlPath, build.config.entrypoints, config.filename, config.title);
+      const file = await createHtmlCloneWithScriptTags(config.template ?? defautHtmlPath, build.config.entrypoints, config.filename, config.title, config.publicPath);
       try {
         await fs.writeFile(`${outdir}/${config.filename}`, await file.arrayBuffer());
       } catch {
