@@ -2,7 +2,8 @@ export default async function createHtmlCloneWithScriptTags (
   htmlFilePath: string,
   entrypoints: string[],
   fileName: string,
-  title?: string
+  title?: string,
+  publicPath: string = './'
 ): Promise<File> {
   const rewriter = new HTMLRewriter()
 
@@ -10,7 +11,7 @@ export default async function createHtmlCloneWithScriptTags (
     element (el: HTMLRewriterTypes.Element) {
       if (el.tagName !== 'head') return
 
-      addScriptTags(el, entrypoints)
+      addScriptTags(el, entrypoints, publicPath);
       // add title element
       if (title !== undefined) addTitleTag(el, title)
     }
@@ -23,11 +24,11 @@ export default async function createHtmlCloneWithScriptTags (
   return new File([newHtmlBlob], fileName, { type: newHtmlBlob.type })
 }
 
-function addScriptTags (el: HTMLRewriterTypes.Element, entrypoints: string[], insertComments: boolean = true): void {
+function addScriptTags (el: HTMLRewriterTypes.Element, entrypoints: string[], publicPath: string, insertComments: boolean = true): void {
   // add sript tags for entry points
   const fileNames = parseScriptNamesFromEntryPoints(entrypoints) // replaceExtensionsWithJs(filePathsToFileNames(entrypoints))
   const scriptTags = fileNames.map(fileName =>
-    `  <script src='./${fileName}' defer></script>\n`
+    `  <script src='${publicPath}${fileName}' defer></script>\n`
   )
 
   if (insertComments) el.append('  <!-- The following <script> tags added via HTMLBunPlugin -->\n', { html: true })
