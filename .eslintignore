@@ -4,3 +4,5 @@
 # Except src/ folder
 !src/
 
+# and HtmlBunPlugin.d.ts
+!src/HtmlBunPlugin.d.ts
