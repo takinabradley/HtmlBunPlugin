@@ -7,7 +7,8 @@ Bun.build({
   plugins: [
     CopyBunPlugin({
       patterns: [
-        {from: 'src/default.html'}
+        { from: 'src/default.html' },
+        { from: 'src/HtmlBunPlugin.d.ts' }
       ]
     })
   ]
