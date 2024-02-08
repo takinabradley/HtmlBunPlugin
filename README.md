@@ -20,7 +20,7 @@ Bun.build({
     // Accepts an optional config object
     filename: 'whatever-you-want.html', // defaults to index.html
     title: 'My App', // defaults to 'Bun App'
-    template: templateHtmlPath // provide a template .html file to inject scripts and title into
+    template: templateHtmlPath, // provide a template .html file to inject scripts and title into
     publicPath: './' // the base path that the entrypoint will be fetched from, defaults to './'
   })]
 })
