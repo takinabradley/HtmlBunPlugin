@@ -9,7 +9,7 @@
   },
   "module": "./out/HtmlBunPlugin.js",
   "devDependencies": {
-    "@takinabradley/copybunplugin": "^0.0.5",
+    "@takinabradley/copybunplugin": "^0.0.x",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "bun-types": "latest",
     "eslint": "^8.49.0",
