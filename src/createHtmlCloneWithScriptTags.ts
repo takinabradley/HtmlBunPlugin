@@ -11,7 +11,7 @@ export default async function createHtmlCloneWithScriptTags (
     element (el: HTMLRewriterTypes.Element) {
       if (el.tagName !== 'head') return
 
-      addScriptTags(el, entrypoints, publicPath);
+      addScriptTags(el, entrypoints, publicPath)
       // add title element
       if (title !== undefined) addTitleTag(el, title)
     }
